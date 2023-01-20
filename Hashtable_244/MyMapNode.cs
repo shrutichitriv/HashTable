@@ -9,7 +9,6 @@ namespace Hashtable_244
     public class MyMapNode<K, V>
     {
 
-
         public readonly int size;
         public readonly LinkedList<KeyValue<K, V>>[] items;
 
@@ -74,6 +73,26 @@ namespace Hashtable_244
             foreach (var i in dict)
             {
                 Console.WriteLine(i.Key + "=" + i.Value + "times");
+            }
+        }
+        public void Remove(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
+            bool itemFound = false;
+            KeyValue<K, V> foundItem = default(KeyValue<K, V>);
+            foreach (KeyValue<K, V> item in linkedList)
+            {
+                if (item.Key.Equals(key))
+                {
+                    itemFound = true;
+                    foundItem = item;
+                }
+            }
+            if (itemFound)
+            {
+                linkedList.Remove(foundItem);
+                Console.WriteLine($"Removed : index {key}");
             }
         }
     }
